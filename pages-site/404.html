@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<title>Redirection…</title>
+<script>
+(function () {
+  var base = '/skills-copilot-codespaces-vscode';
+  var path = location.pathname;
+  // If missing asset under /jeu/, send to jeu index (client router can take over only for app entry)
+  if (path.indexOf(base + '/jeu') === 0) {
+    location.replace(base + '/jeu/');
+    return;
+  }
+  location.replace(base + '/');
+})();
+</script>
+</head>
+<body><p><a href="/skills-copilot-codespaces-vscode/">Retour portfolio</a></p></body>
+</html>

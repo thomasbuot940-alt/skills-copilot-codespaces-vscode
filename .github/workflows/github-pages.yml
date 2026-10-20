@@ -1,0 +1,52 @@
+# Deploy config only — builds portfolio gallery + game for GitHub Pages.
+# After Pages is set to "GitHub Actions" (or branch gh-pages), this keeps the site updated.
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [cursor/puissance-game-store-5787, main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: puissance-game/package-lock.json
+      - name: Install & build game
+        working-directory: puissance-game
+        run: |
+          npm ci
+          npx vite build --base=/skills-copilot-codespaces-vscode/jeu/ --outDir="${GITHUB_WORKSPACE}/_site/jeu" --emptyOutDir
+          cp "${GITHUB_WORKSPACE}/_site/jeu/index.html" "${GITHUB_WORKSPACE}/_site/jeu/404.html"
+      - name: Assemble portfolio site
+        run: |
+          mkdir -p _site/screenshots
+          cp pages-site/index.html pages-site/styles.css pages-site/404.html _site/
+          cp screenshots/puissance-game/*.png _site/screenshots/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
