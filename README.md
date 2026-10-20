@@ -1,3 +1,6 @@
+> Développeur web junior — jeux vidéo, sites web, interfaces soignées.  
+> Ouvert aux opportunités en PME et startup.
+
 # Thomas — Portfolio développeur
 
 Ingénieur logiciel. Je conçois des interfaces soignées, des apps web modernes, et des expériences qui se remarquent — pour les PME et startups (dont le Japon).
