@@ -32,7 +32,6 @@ body {
   font-family: var(--sans);
   font-size: 1.05rem;
   line-height: 1.6;
-  overflow-x: hidden;
 }
 
 #binaire {
@@ -181,12 +180,14 @@ h3 {
   max-width: 42ch;
   color: var(--text);
   font-size: 1.18rem;
+  overflow-wrap: anywhere;
 }
 
 .lead {
   max-width: 62ch;
   color: var(--muted);
   font-size: 1.12rem;
+  overflow-wrap: anywhere;
 }
 
 .hero-actions,
@@ -207,10 +208,15 @@ h3 {
   opacity: 0.7;
 }
 
-.ticker span {
-  display: inline-block;
-  white-space: nowrap;
+.ticker-track {
+  display: flex;
+  width: max-content;
   animation: drift 36s linear infinite;
+}
+
+.ticker-track span {
+  padding-right: 2rem;
+  white-space: nowrap;
 }
 
 @keyframes drift {
@@ -454,7 +460,7 @@ textarea[aria-invalid="true"] {
     scroll-behavior: auto;
   }
 
-  .ticker span {
+  .ticker-track {
     animation: none;
   }
 }

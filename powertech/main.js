@@ -47,6 +47,8 @@ function setupRain() {
     canvas.width = Math.floor(width * dpr);
     canvas.height = Math.floor(height * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.fillStyle = "#05060a";
+    ctx.fillRect(0, 0, width, height);
     const count = Math.max(1, Math.ceil(width / size));
     columns = Array.from({ length: count }, function (_, index) {
       return {
@@ -125,7 +127,11 @@ function setupRain() {
     }
     start();
   });
-  if (typeof reduce.addEventListener === "function") reduce.addEventListener("change", start);
+  if (typeof reduce.addEventListener === "function") {
+    reduce.addEventListener("change", start);
+  } else if (typeof reduce.addListener === "function") {
+    reduce.addListener(start);
+  }
 }
 
 function dayStamp() {
