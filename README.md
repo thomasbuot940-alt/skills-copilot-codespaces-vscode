@@ -28,7 +28,7 @@ python3 -m http.server 8765
 
 Puis ouvrir `http://127.0.0.1:8765`.
 
-Le brief reste sur la machine du visiteur (copie dans le presse-papiers). Pour ouvrir aussi la messagerie, remplacer `CONTACT_EMAIL` au début de `powertech/main.js`.
+Le brief est copié, puis la messagerie s’ouvre vers l’adresse définie dans `CONTACT_EMAIL` au début de `powertech/main.js`.
 
 ## Projet précédent : Puissance Game
 

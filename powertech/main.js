@@ -1,7 +1,7 @@
 /* PowerTech
    Branche le canal mail en remplaçant la chaîne vide par ton adresse.
    Tant qu'elle est vide, le brief est copié et affiché, jamais envoyé. */
-const CONTACT_EMAIL = "";
+const CONTACT_EMAIL = "thomasbuot940@gmail.com";
 
 const root = document.documentElement;
 const world = document.getElementById("world");
