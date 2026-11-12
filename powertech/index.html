@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="dark">
     <meta name="theme-color" content="#05060a">
-    <title>PowerTech — Sites web par IA générative, en Python</title>
+    <title>PowerTech — Sites web générés par intelligence artificielle</title>
     <meta
       name="description"
-      content="PowerTech crée des sites web par IA générative, en Python. Tu décris ton entreprise, le site se génère, Python le tient. Demande le tien."
+      content="PowerTech crée des sites web en les générant par intelligence artificielle. On le fait ensemble, on le partage ici, et le règlement se fait à la livraison."
     >
-    <meta property="og:title" content="PowerTech — Sites web par IA générative, en Python">
+    <meta property="og:title" content="PowerTech — Sites web générés par intelligence artificielle">
     <meta
       property="og:description"
-      content="Chez PowerTech, les sites se créent par IA générative, en Python. Décris ton entreprise et demande le tien."
+      content="Décris ton activité. PowerTech génère le site par intelligence artificielle, le partage dans sa vitrine, et encaisse à la livraison."
     >
     <meta property="og:type" content="website">
     <meta property="og:locale" content="fr_FR">
@@ -21,337 +21,239 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Syne:wght@700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;600;700&family=Syne:wght@700;800&display=swap"
       rel="stylesheet"
     >
     <link rel="stylesheet" href="styles.css">
-    <script>
-      (function () {
-        var reduce = false;
-        var seen = false;
-        try {
-          reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-          seen = sessionStorage.getItem("pt-boot") === "1";
-        } catch (err) {}
-        if (reduce) document.documentElement.classList.add("is-calm");
-        if (!reduce && !seen) document.documentElement.classList.add("is-booting");
-      })();
-    </script>
   </head>
   <body>
     <a class="skip" href="#contenu">Aller au contenu</a>
-    <canvas id="world" aria-hidden="true"></canvas>
-    <div class="vignette" aria-hidden="true"></div>
-    <div class="scanlines" aria-hidden="true"></div>
-    <div class="charge-rail" aria-hidden="true"><span></span></div>
-    <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+    <canvas id="binaire" aria-hidden="true"></canvas>
 
-    <div id="boot" class="boot">
-      <div class="boot-panel">
-        <p class="kicker">PowerTech // bios</p>
-        <ol class="boot-log">
-          <li data-state="OK">IA générative</li>
-          <li data-state="OK">Moteur Python</li>
-          <li data-state="CHARGE">Noyau de fluidité</li>
-          <li data-state="PRÊT">PowerTech</li>
+    <header class="nav">
+      <a class="logo" href="#sommet">PowerTech</a>
+      <nav class="nav-links" aria-label="Navigation">
+        <a href="#metier">Métier</a>
+        <a href="#ensemble">Ensemble</a>
+        <a href="#vitrine">Vitrine</a>
+        <a href="#paiement">Paiement</a>
+      </nav>
+      <a class="btn btn-solid" href="#demande">Demander un site</a>
+    </header>
+
+    <main id="contenu">
+      <section class="hero" id="sommet" aria-labelledby="titre">
+        <p class="kicker">PowerTech · Paris · Intelligence artificielle</p>
+        <h1 id="titre">PowerTech</h1>
+        <p class="deck">
+          Je crée des sites web en les générant par intelligence artificielle.
+          Tu décris ton activité. L’IA pose le site. On l’ajuste ensemble, je le
+          livre, puis on le partage dans cette vitrine.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-solid" href="#demande">Démarrer un site</a>
+          <a class="btn" href="#paiement">Case de paiement</a>
+        </div>
+        <div class="ticker" aria-hidden="true">
+          <span>01001001 01000001 00100000 01010000 01001111 01010111 01000101 01010010 00100000 01001001 01000001 00100000 01010000 01001111 01010111 01000101 01010010 00100000 01001001 01000001 00100000 01010000 01001111 01010111 01000101 01010010 00100000 01001001 01000001 00100000 01010000 01001111 01010111 01000101 01010010 00100000</span>
+        </div>
+      </section>
+
+      <section class="band" id="metier" aria-labelledby="titre-metier">
+        <div class="band-head">
+          <p class="kicker">Pour les futurs clients</p>
+          <h2 id="titre-metier">Des sites générés par intelligence artificielle</h2>
+        </div>
+        <p class="lead">
+          PowerTech sert à vendre ce métier : un site web créé en le générant
+          par intelligence artificielle, puis tenu jusqu’à la mise en ligne.
+          Tu n’achètes pas un modèle vide. Tu décris ce que tu fais, et le site
+          sort de là.
+        </p>
+        <div class="cards">
+          <article class="card">
+            <p class="index">01</p>
+            <h3>Génération</h3>
+            <p>L’IA rédige, structure et met en page à partir de ton activité, de tes offres et du ton que tu veux.</p>
+          </article>
+          <article class="card">
+            <p class="index">02</p>
+            <h3>À ton nom</h3>
+            <p>Le résultat parle de toi, pas d’un thème générique. On garde ce qui vend, on retire ce qui flotte.</p>
+          </article>
+          <article class="card">
+            <p class="index">03</p>
+            <h3>Prêt à montrer</h3>
+            <p>Une fois le site livré, il peut être publié. Les prochains clients le voient dans la vitrine PowerTech.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="band" id="ensemble" aria-labelledby="titre-ensemble">
+        <div class="band-head">
+          <p class="kicker">Avec toi</p>
+          <h2 id="titre-ensemble">On fait le site ensemble, puis on le partage ici</h2>
+        </div>
+        <ol class="steps">
+          <li>
+            <span>01</span>
+            <div>
+              <h3>Tu racontes</h3>
+              <p>Activité, clients, ce que le site doit faire demander.</p>
+            </div>
+          </li>
+          <li>
+            <span>02</span>
+            <div>
+              <h3>Je génère</h3>
+              <p>Le site se construit par intelligence artificielle, à partir de ce brief.</p>
+            </div>
+          </li>
+          <li>
+            <span>03</span>
+            <div>
+              <h3>On ajuste</h3>
+              <p>On revoit les pages ensemble jusqu’à ce que tu puisses l’envoyer à un client.</p>
+            </div>
+          </li>
+          <li>
+            <span>04</span>
+            <div>
+              <h3>On publie ici</h3>
+              <p>Le site livré rejoint cette vitrine. Ensuite, la case de paiement sert à régler la livraison.</p>
+            </div>
+          </li>
         </ol>
-        <div class="boot-bar" aria-hidden="true"><span></span></div>
-        <button type="button" class="btn btn-ghost" id="skip-boot">Entrer</button>
-      </div>
-    </div>
+      </section>
 
-    <div id="site">
-      <header class="nav">
-        <a class="logo" href="#sommet">
-          <span class="mark" aria-hidden="true"></span>
-          <span>PowerTech</span>
-        </a>
-        <nav id="nav-panel" class="site-nav" aria-label="Navigation">
-          <a href="#offres">Métier</a>
-          <a href="#protocole">Protocole</a>
-          <a href="#chambre">Chambre</a>
-          <button type="button" id="sound" aria-pressed="false">Son</button>
-          <button type="button" id="calm" aria-pressed="false">Calme</button>
-        </nav>
-        <div class="nav-tools">
-          <a class="btn btn-small" href="#brief">Demande</a>
-          <button
-            type="button"
-            class="menu-btn"
-            id="menu"
-            aria-expanded="false"
-            aria-controls="nav-panel"
-          >
-            Menu
-          </button>
+      <section class="band" id="vitrine" aria-labelledby="titre-vitrine">
+        <div class="band-head">
+          <p class="kicker">Vitrine</p>
+          <h2 id="titre-vitrine">Les sites qu’on partage</h2>
         </div>
-      </header>
-
-      <main id="contenu">
-        <section class="hero" id="sommet" aria-labelledby="titre">
-          <div class="hero-grid">
-            <div class="hero-copy">
-              <p class="kicker">PowerTech · Paris · Sites en Python</p>
-              <h1 class="wordmark-block" id="titre">
-                <span class="wordmark" data-text="Power">Power</span>
-                <span class="wordmark" data-text="Tech">Tech</span>
-              </h1>
-              <p class="deck">
-                Chez PowerTech, on crée des sites web par IA générative, en
-                Python. Tu décris ton entreprise. L’IA pose le site. Python le
-                tient. Tu le montres, et les demandes peuvent arriver. Cette
-                page en est une : elle prend de la puissance pendant que tu
-                descends.
-              </p>
-              <p class="signal" aria-hidden="true">
-                <span>Signal</span>
-                <span id="pulse">010010000100111101010111</span>
-              </p>
-              <div class="hero-actions">
-                <a class="btn" href="#brief">Demander mon site</a>
-                <a class="btn btn-ghost" href="#offres">Le métier</a>
-              </div>
-              <dl class="hero-meta">
-                <div>
-                  <dt>Méthode</dt>
-                  <dd>IA générative</dd>
-                </div>
-                <div>
-                  <dt>Langage</dt>
-                  <dd>Python</dd>
-                </div>
-                <div>
-                  <dt>Demandes</dt>
-                  <dd>Ouvertes</dd>
-                </div>
-              </dl>
-            </div>
-            <div class="reactor" id="reactor" aria-hidden="true">
-              <div class="ring ring-a"></div>
-              <div class="ring ring-b"></div>
-              <div class="ring ring-c"></div>
-              <div class="orbit" id="orbit-a"><span class="satellite">1</span></div>
-              <div class="orbit" id="orbit-b"><span class="satellite sat-b">0</span></div>
-              <div class="core"></div>
-              <p class="reactor-readout"><span id="charge">08</span><small>%</small></p>
-              <p class="reactor-label">Noyau</p>
-            </div>
-          </div>
-        </section>
-
-        <div class="marquee" aria-hidden="true">
-          <div class="marquee-track" id="marquee"></div>
+        <p class="lead">
+          Chaque site développé avec un client a sa place ici. La vitrine
+          grandit au fur et à mesure des livraisons.
+        </p>
+        <div class="cards">
+          <article class="card card-live">
+            <p class="index">En ligne</p>
+            <h3>PowerTech</h3>
+            <p>Ce site. Il présente le métier, la vitrine et la case de paiement.</p>
+            <a href="#sommet">Voir le site</a>
+          </article>
+          <article class="card">
+            <p class="index">Libre</p>
+            <h3>Prochain site</h3>
+            <p>Le prochain site fait ensemble s’affiche dans cette case, avec son lien.</p>
+          </article>
         </div>
+      </section>
 
-        <section class="band" id="offres" aria-labelledby="titre-offres">
-          <div class="wrap panel">
-            <p class="kicker">02 · Le métier</p>
-            <h2 id="titre-offres">Un site. Généré. Livré.</h2>
-            <p class="lede">
-              Dans l’entreprise, PowerTech crée des sites web par IA
-              générative, sur le langage Python. Tu veux être vu, tu veux des
-              demandes : le site est le premier commercial. Il travaille même
-              quand tu es ailleurs.
-            </p>
-            <div class="offers">
-              <article class="offer">
-                <p class="idx">01</p>
-                <h3 data-bin="01001001">Génération</h3>
-                <p>
-                  Tu parles de ton activité, de tes clients, du ton. L’IA
-                  compose la direction, les pages et les phrases. Tu vois le
-                  site sans attendre un long cycle de maquettes.
-                </p>
-                <p class="tag">IA</p>
-              </article>
-              <article class="offer">
-                <p class="idx">02</p>
-                <h3 data-bin="01010000">Python</h3>
-                <p>
-                  Le site est tenu en Python. Ce n’est pas une image à
-                  regarder : c’est une page que tu peux montrer, faire tourner
-                  et mettre en ligne.
-                </p>
-                <p class="tag">Python</p>
-              </article>
-              <article class="offer">
-                <p class="idx">03</p>
-                <h3 data-bin="01010011">Présence</h3>
-                <p>
-                  Le rendu doit arrêter le regard. Cette page est le style
-                  PowerTech : une charge visuelle qui grandit, et un message
-                  assez net pour qu’on écrive.
-                </p>
-                <p class="tag">Marque</p>
-              </article>
-              <article class="offer">
-                <p class="idx">04</p>
-                <h3 data-bin="01000100">Demande</h3>
-                <p>
-                  Un brief suffit pour lancer le tien. Les demandes sont
-                  ouvertes : plus elle est claire, plus vite ton site peut
-                  partir chercher les suivants.
-                </p>
-                <p class="tag">Brief</p>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <section class="band" id="protocole" aria-labelledby="titre-protocole">
-          <div class="wrap panel">
-            <p class="kicker">03 · Protocole</p>
-            <h2 id="titre-protocole">Comment ton site sort</h2>
-            <ol class="steps">
-              <li>
-                <span>01</span>
-                <h3>Brief</h3>
-                <p>Tu écris ce que fait l’entreprise, et à qui elle doit parler.</p>
-              </li>
-              <li>
-                <span>02</span>
-                <h3>Génération</h3>
-                <p>L’IA produit la direction du site : pages, ton, présence.</p>
-              </li>
-              <li>
-                <span>03</span>
-                <h3>Python</h3>
-                <p>On assemble le site dans le langage et on le fait tenir.</p>
-              </li>
-              <li>
-                <span>04</span>
-                <h3>En ligne</h3>
-                <p>Tu le publies. Tu l’envoies. Les demandes ont une adresse.</p>
-              </li>
-            </ol>
-          </div>
-        </section>
-
-        <section class="band" id="chambre" aria-labelledby="titre-chambre">
-          <div class="wrap panel chamber">
-            <div class="chamber-copy">
-              <p class="kicker">04 · Chambre de charge</p>
-              <h2 id="titre-chambre">La fluidité qui grandit</h2>
-              <p class="lede">
-                Cette page est un site PowerTech. Descends, ou pousse le
-                régime : la densité des 1 et des 0, la grille et la couleur
-                suivent la charge. Le mode calme met les effets en pause si tu
-                préfères lire.
-              </p>
-              <label class="slider-label" for="regime">
-                Régime manuel
-                <span id="regime-value">0</span>
-              </label>
-              <input
-                id="regime"
-                type="range"
-                min="0"
-                max="100"
-                value="0"
-                step="1"
-              >
-              <div class="hero-actions">
-                <button type="button" class="btn btn-alert" id="surge">Surcharge</button>
-              </div>
-              <p class="fine" id="surge-note">
-                La surcharge pousse le noyau à fond pendant quelques secondes.
-                La charge affichée prend le plus haut entre le défilement, le
-                curseur et la surcharge.
-              </p>
-            </div>
-            <div class="telemetry" aria-hidden="true">
-              <div class="stat">
-                <span>Charge</span>
-                <strong id="stat-charge">00</strong>
-              </div>
-              <div class="stat">
-                <span>Colonnes</span>
-                <strong id="stat-cols">00</strong>
-              </div>
-              <div class="stat">
-                <span>Images/s</span>
-                <strong id="stat-fps">00</strong>
-              </div>
-              <div class="stat">
-                <span>Qualité</span>
-                <strong id="stat-quality">Pleine</strong>
-              </div>
-              <div class="segments" id="segments"></div>
-            </div>
-            <canvas id="wave" aria-hidden="true"></canvas>
-          </div>
-        </section>
-
-        <section class="band" id="brief" aria-labelledby="titre-brief">
-          <div class="wrap panel">
-            <p class="kicker">05 · Brief</p>
-            <div class="brief-head">
-              <h2 id="titre-brief">Demande ton site</h2>
-              <p class="canal" id="canal">Canal · presse-papiers</p>
-            </div>
-            <p class="lede">
-              Décris l’entreprise et le site que tu veux. PowerTech lit chaque
-              demande. Rien ne part vers un serveur : le texte se copie, puis
-              ta messagerie s’ouvre.
-            </p>
-            <noscript>
-              <p class="noscript">JavaScript est requis pour préparer le brief et lancer les effets.</p>
-            </noscript>
-            <form id="brief-form" novalidate>
-              <p class="form-alert" id="form-alert" role="alert"></p>
-              <div class="split">
-                <div class="field">
-                  <label for="nom">Nom</label>
-                  <input id="nom" name="nom" type="text" autocomplete="name" maxlength="80" required >
-                  <p class="err" id="err-nom"></p>
-                </div>
-                <div class="field">
-                  <label for="email">Email</label>
-                  <input id="email" name="email" type="email" autocomplete="email" maxlength="120" required >
-                  <p class="err" id="err-email"></p>
-                </div>
-              </div>
-              <div class="field">
-                <label for="mission">Ton site</label>
-                <select id="mission" name="mission" required>
-                  <option value="">Choisir</option>
-                  <option>Nouveau site</option>
-                  <option>Reprise d’un site</option>
-                  <option>Je veux en parler</option>
-                </select>
-                <p class="err" id="err-mission"></p>
-              </div>
-              <div class="field">
-                <label for="message">Ton entreprise</label>
-                <textarea id="message" name="message" maxlength="2000" required placeholder="Ce que tu vends, à qui, et le site que tu veux."></textarea>
-                <p class="err" id="err-message"></p>
-              </div>
-              <div class="hp">
-                <label for="societe">Société</label>
-                <input id="societe" name="societe" type="text" tabindex="-1" autocomplete="off">
-              </div>
-              <button class="btn" type="submit">Envoyer ma demande</button>
-            </form>
-            <div id="result" class="result" hidden>
-              <p class="kicker" id="result-status" tabindex="-1"></p>
-              <pre id="brief-out"></pre>
-              <button type="button" class="btn btn-ghost" id="reset-brief">Nouveau brief</button>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <footer class="footer">
-        <div class="wrap footer-grid">
-          <div>
-            <p class="logo-foot">PowerTech</p>
-            <p>Sites par IA générative, en Python · Thomas · Paris</p>
-          </div>
-          <p>Aucun cookie. Aucune mesure d’audience. La demande ne quitte pas ta machine tant que tu ne l’envoies pas.</p>
-          <p><a href="https://github.com/thomasbuot940-alt">GitHub</a></p>
+      <section class="band" id="demande" aria-labelledby="titre-demande">
+        <div class="band-head">
+          <p class="kicker">Demande</p>
+          <h2 id="titre-demande">Dis ce que le site doit vendre</h2>
         </div>
-      </footer>
-    </div>
+        <form id="lead-form" class="panel" method="post" action="#demande" novalidate>
+          <div class="field">
+            <label for="nom">Nom</label>
+            <input id="nom" name="nom" type="text" autocomplete="name" maxlength="80" required>
+            <p class="field-error" id="nom-error"></p>
+          </div>
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" autocomplete="email" maxlength="120" required>
+            <p class="field-error" id="email-error"></p>
+          </div>
+          <div class="field">
+            <label for="projet">Le site à créer</label>
+            <textarea id="projet" name="projet" rows="5" maxlength="2000" required></textarea>
+            <p class="field-error" id="projet-error"></p>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-solid">Envoyer la demande</button>
+            <button type="button" class="btn" id="lead-copy">Copier le brief</button>
+          </div>
+          <pre id="lead-preview" class="preview" hidden></pre>
+          <p class="form-note" id="lead-note" role="status"></p>
+        </form>
+      </section>
+
+      <section class="band" id="paiement" aria-labelledby="titre-paiement">
+        <div class="band-head">
+          <p class="kicker">Après la livraison</p>
+          <h2 id="titre-paiement">Case de paiement</h2>
+        </div>
+        <p class="lead">
+          Quand le site est développé, le client paie ici. La case prépare le
+          montant, le moyen et une référence. Le règlement part vers PowerTech.
+          Le paiement par carte sera branché sur cette même case quand le compte
+          de la startup sera ouvert.
+        </p>
+        <form id="pay-form" class="panel pay-case" method="post" action="#paiement" novalidate>
+          <p class="pay-flag">Payable une fois le site livré</p>
+          <div class="field">
+            <label for="pay-projet">Site livré</label>
+            <input id="pay-projet" name="pay-projet" type="text" maxlength="80" required>
+            <p class="field-error" id="pay-projet-error"></p>
+          </div>
+          <div class="field">
+            <label for="pay-montant">Montant convenu, en euros</label>
+            <input id="pay-montant" name="pay-montant" type="text" inputmode="decimal" autocomplete="off" placeholder="1500" required>
+            <p class="field-error" id="pay-montant-error"></p>
+          </div>
+          <fieldset class="field">
+            <legend>Moyen de paiement</legend>
+            <label class="choice">
+              <input type="radio" name="moyen" value="Virement" required>
+              <span>Virement</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="moyen" value="PayPal">
+              <span>PayPal</span>
+            </label>
+            <p class="field-error" id="moyen-error"></p>
+          </fieldset>
+          <p class="fine">
+            Destinataire : <a href="mailto:thomasbuot940@gmail.com">thomasbuot940@gmail.com</a>.
+            L’IBAN ou l’adresse PayPal est confirmé dans la réponse à l’ordre.
+          </p>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-pay">Préparer le règlement</button>
+            <button type="button" class="btn" id="pay-copy">Copier l’ordre</button>
+            <button type="button" class="btn" id="pay-send">Envoyer l’ordre</button>
+          </div>
+          <div id="pay-slip" class="slip" hidden>
+            <p class="slip-amount" id="pay-amount"></p>
+            <dl>
+              <div>
+                <dt>Référence</dt>
+                <dd id="pay-ref"></dd>
+              </div>
+              <div>
+                <dt>Site</dt>
+                <dd id="pay-site"></dd>
+              </div>
+              <div>
+                <dt>Moyen</dt>
+                <dd id="pay-method"></dd>
+              </div>
+              <div>
+                <dt>Statut</dt>
+                <dd>En attente de règlement</dd>
+              </div>
+            </dl>
+          </div>
+          <p class="form-note" id="pay-note" role="status"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>PowerTech · Sites générés par intelligence artificielle</p>
+      <a href="mailto:thomasbuot940@gmail.com">thomasbuot940@gmail.com</a>
+    </footer>
     <script src="main.js" defer></script>
   </body>
 </html>
