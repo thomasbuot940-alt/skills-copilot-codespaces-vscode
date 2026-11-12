@@ -2,7 +2,8 @@
 
 > PowerTech crée des sites web en les générant par intelligence artificielle.
 
-Chez PowerTech, je crée des sites web en les générant par intelligence artificielle.
+Chez PowerTech, je crée des sites web par IA générative. Tu décris
+ton activité. Le site se génère. Tu peux le demander depuis la page.
 
 ## Projet phare : PowerTech
 

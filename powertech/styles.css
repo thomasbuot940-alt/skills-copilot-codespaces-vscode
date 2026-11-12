@@ -177,7 +177,12 @@ h3 {
   margin-bottom: 0.4rem;
 }
 
-.deck,
+.deck {
+  max-width: 42ch;
+  color: var(--text);
+  font-size: 1.18rem;
+}
+
 .lead {
   max-width: 62ch;
   color: var(--muted);
@@ -319,6 +324,11 @@ textarea {
 textarea {
   resize: vertical;
   min-height: 8rem;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #7f8f99;
 }
 
 input[aria-invalid="true"],

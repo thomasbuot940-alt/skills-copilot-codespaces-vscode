@@ -199,10 +199,10 @@ function setupLead() {
     const projet = textControl("projet");
     if (!nom || !email || !projet) return "";
     return [
-      "Demande PowerTech",
+      "Demande PowerTech — site par IA générative",
       "Nom : " + nom.value.trim(),
       "E-mail : " + email.value.trim(),
-      "Site : " + projet.value.trim()
+      "Site à créer : " + projet.value.trim()
     ].join("\n");
   }
 
@@ -238,7 +238,7 @@ function setupLead() {
     preview.hidden = false;
     preview.textContent = body;
     note.textContent = "Ouverture de la messagerie.";
-    window.location.href = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent("Demande de site PowerTech") + "&body=" + encodeURIComponent(body);
+    window.location.href = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent("Demande de site par IA générative") + "&body=" + encodeURIComponent(body);
   });
 
   copy.addEventListener("click", function () {
