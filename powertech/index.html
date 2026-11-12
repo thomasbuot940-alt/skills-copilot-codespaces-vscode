@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#05060a" />
+    <title>PowerTech — Systèmes web freelance</title>
+    <meta
+      name="description"
+      content="PowerTech, vitrine freelance de Thomas. Sites, applications et automatisations. La page monte en régime : pluie binaire, grille et noyau accélèrent avec la charge."
+    />
+    <meta property="og:title" content="PowerTech — Systèmes web freelance" />
+    <meta
+      property="og:description"
+      content="Thomas conçoit des sites et des outils web. Ici, la fluidité augmente avec la charge."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Syne:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      (function () {
+        var reduce = false;
+        var seen = false;
+        try {
+          reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+          seen = sessionStorage.getItem("pt-boot") === "1";
+        } catch (err) {}
+        if (reduce) document.documentElement.classList.add("is-calm");
+        if (!reduce && !seen) document.documentElement.classList.add("is-booting");
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#contenu">Aller au contenu</a>
+    <canvas id="world" aria-hidden="true"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="scanlines" aria-hidden="true"></div>
+    <div class="charge-rail" aria-hidden="true"><span></span></div>
+    <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+
+    <div id="boot" class="boot" aria-hidden="true">
+      <div class="boot-panel">
+        <p class="kicker">PowerTech // bios</p>
+        <ol class="boot-log">
+          <li data-state="OK">Mémoire liquide</li>
+          <li data-state="OK">Pluie binaire</li>
+          <li data-state="CHARGE">Noyau de fluidité</li>
+          <li data-state="PRÊT">Opérateur Thomas</li>
+        </ol>
+        <div class="boot-bar" aria-hidden="true"><span></span></div>
+        <button type="button" class="btn btn-ghost" id="skip-boot">Entrer</button>
+      </div>
+    </div>
+
+    <div id="site">
+      <header class="nav">
+        <a class="logo" href="#sommet">
+          <span class="mark" aria-hidden="true"></span>
+          <span>PowerTech</span>
+        </a>
+        <nav id="nav-panel" class="site-nav" aria-label="Navigation">
+          <a href="#offres">Offres</a>
+          <a href="#protocole">Protocole</a>
+          <a href="#chambre">Chambre</a>
+          <button type="button" id="sound" aria-pressed="false">Son</button>
+          <button type="button" id="calm" aria-pressed="false">Calme</button>
+        </nav>
+        <div class="nav-tools">
+          <a class="btn btn-small" href="#brief">Brief</a>
+          <button
+            type="button"
+            class="menu-btn"
+            id="menu"
+            aria-expanded="false"
+            aria-controls="nav-panel"
+          >
+            Menu
+          </button>
+        </div>
+      </header>
+
+      <main id="contenu">
+        <section class="hero" id="sommet" aria-labelledby="titre">
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <p class="kicker">Sys.01 · Freelance · Paris</p>
+              <h1 class="wordmark-block" id="titre" aria-label="PowerTech">
+                <span class="wordmark" data-text="Power">Power</span>
+                <span class="wordmark" data-text="Tech">Tech</span>
+              </h1>
+              <p class="deck">
+                Je construis des sites et des outils web pour des missions
+                freelance — indépendants, PME, startups. Cette page est le banc
+                d’essai : la pluie de 1 et de 0, la grille et le noyau montent
+                en régime à mesure que tu descends.
+              </p>
+              <p class="signal" aria-hidden="true">
+                <span>Signal</span>
+                <span id="pulse">010010000100111101010111</span>
+              </p>
+              <div class="hero-actions">
+                <a class="btn" href="#brief">Lancer un brief</a>
+                <a class="btn btn-ghost" href="#offres">Voir les offres</a>
+              </div>
+              <dl class="hero-meta">
+                <div>
+                  <dt>Opérateur</dt>
+                  <dd>Thomas</dd>
+                </div>
+                <div>
+                  <dt>Base</dt>
+                  <dd>Paris</dd>
+                </div>
+                <div>
+                  <dt>Statut</dt>
+                  <dd>Missions ouvertes</dd>
+                </div>
+              </dl>
+            </div>
+            <div class="reactor" id="reactor" aria-hidden="true">
+              <div class="ring ring-a"></div>
+              <div class="ring ring-b"></div>
+              <div class="ring ring-c"></div>
+              <div class="orbit" id="orbit-a"><span class="satellite">1</span></div>
+              <div class="orbit" id="orbit-b"><span class="satellite sat-b">0</span></div>
+              <div class="core"></div>
+              <p class="reactor-readout"><span id="charge">08</span><small>%</small></p>
+              <p class="reactor-label">Noyau</p>
+            </div>
+          </div>
+        </section>
+
+        <div class="marquee" aria-hidden="true">
+          <div class="marquee-track" id="marquee"></div>
+        </div>
+
+        <section class="band" id="offres" aria-labelledby="titre-offres">
+          <div class="wrap panel">
+            <p class="kicker">02 · Offres</p>
+            <h2 id="titre-offres">Quatre façons d’entrer</h2>
+            <p class="lede">
+              Le périmètre se fixe ensemble, le prix aussi — sur brief, pas sur
+              une grille figée. Chaque mission part d’un échange clair.
+            </p>
+            <div class="offers">
+              <article class="offer">
+                <p class="idx">01</p>
+                <h3 data-bin="01010110">Vitrine</h3>
+                <p>
+                  Un site qui porte la marque et va droit au contact. Rapide,
+                  lisible, assez fort pour qu’on s’en souvienne.
+                </p>
+                <p class="tag">Site</p>
+              </article>
+              <article class="offer">
+                <p class="idx">02</p>
+                <h3 data-bin="01000001">Application</h3>
+                <p>
+                  Un outil dans le navigateur : parcours nets, états clairs,
+                  une logique qui tient quand on s’en sert vraiment.
+                </p>
+                <p class="tag">App</p>
+              </article>
+              <article class="offer">
+                <p class="idx">03</p>
+                <h3 data-bin="01000110">Automatisation</h3>
+                <p>
+                  Retirer le répétitif. Formulaires, flux, petits systèmes qui
+                  travaillent à ta place.
+                </p>
+                <p class="tag">Flux</p>
+              </article>
+              <article class="offer">
+                <p class="idx">04</p>
+                <h3 data-bin="01010010">Reprise</h3>
+                <p>
+                  Un existant à remettre d’aplomb. D’abord un diagnostic court,
+                  ensuite une version plus nette et plus fluide.
+                </p>
+                <p class="tag">Reprise</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="band" id="protocole" aria-labelledby="titre-protocole">
+          <div class="wrap panel">
+            <p class="kicker">03 · Protocole</p>
+            <h2 id="titre-protocole">Du signal à la mise en ligne</h2>
+            <ol class="steps">
+              <li>
+                <span>01</span>
+                <h3>Écoute</h3>
+                <p>Le besoin, le public, les contraintes. Rien ne part sans ça.</p>
+              </li>
+              <li>
+                <span>02</span>
+                <h3>Tracé</h3>
+                <p>Structure, parcours, périmètre. Tu vois où on va avant le code.</p>
+              </li>
+              <li>
+                <span>03</span>
+                <h3>Forge</h3>
+                <p>Construction en allers courts. Tu suis, tu corriges tôt.</p>
+              </li>
+              <li>
+                <span>04</span>
+                <h3>Relais</h3>
+                <p>Mise en ligne, passation, et les ajustements du premier contact réel.</p>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="band" id="chambre" aria-labelledby="titre-chambre">
+          <div class="wrap panel chamber">
+            <div class="chamber-copy">
+              <p class="kicker">04 · Chambre de charge</p>
+              <h2 id="titre-chambre">La fluidité qui grandit</h2>
+              <p class="lede">
+                Descends dans la page ou pousse le régime. La densité des 1 et
+                des 0, la vitesse de la grille et l’écart de couleur suivent la
+                charge. Le mode calme met les effets en pause si tu préfères
+                lire tranquille.
+              </p>
+              <label class="slider-label" for="regime">
+                Régime manuel
+                <span id="regime-value">0</span>
+              </label>
+              <input
+                id="regime"
+                type="range"
+                min="0"
+                max="100"
+                value="0"
+                step="1"
+              />
+              <div class="hero-actions">
+                <button type="button" class="btn btn-alert" id="surge">Surcharge</button>
+              </div>
+              <p class="fine" id="surge-note">
+                La surcharge pousse le noyau à fond pendant quelques secondes.
+                La charge affichée prend le plus haut entre le défilement, le
+                curseur et la surcharge.
+              </p>
+            </div>
+            <div class="telemetry" aria-hidden="true">
+              <div class="stat">
+                <span>Charge</span>
+                <strong id="stat-charge">00</strong>
+              </div>
+              <div class="stat">
+                <span>Colonnes</span>
+                <strong id="stat-cols">00</strong>
+              </div>
+              <div class="stat">
+                <span>Images/s</span>
+                <strong id="stat-fps">00</strong>
+              </div>
+              <div class="stat">
+                <span>Qualité</span>
+                <strong id="stat-quality">Pleine</strong>
+              </div>
+              <div class="segments" id="segments"></div>
+            </div>
+            <canvas id="wave" aria-hidden="true"></canvas>
+          </div>
+        </section>
+
+        <section class="band" id="brief" aria-labelledby="titre-brief">
+          <div class="wrap panel">
+            <p class="kicker">05 · Brief</p>
+            <div class="brief-head">
+              <h2 id="titre-brief">Décris la mission</h2>
+              <p class="canal" id="canal">Canal · presse-papiers</p>
+            </div>
+            <p class="lede">
+              Rien n’est envoyé à un serveur. Le brief s’écrit ici, se copie,
+              et reste prêt à partir. Thomas le lit dès que tu le lui transmets.
+            </p>
+            <noscript>
+              <p class="noscript">JavaScript est requis pour préparer le brief et lancer les effets.</p>
+            </noscript>
+            <form id="brief-form" novalidate>
+              <p class="form-alert" id="form-alert" role="alert"></p>
+              <div class="split">
+                <div class="field">
+                  <label for="nom">Nom</label>
+                  <input id="nom" name="nom" type="text" autocomplete="name" maxlength="80" required />
+                  <p class="err" id="err-nom"></p>
+                </div>
+                <div class="field">
+                  <label for="email">Email</label>
+                  <input id="email" name="email" type="email" autocomplete="email" maxlength="120" required />
+                  <p class="err" id="err-email"></p>
+                </div>
+              </div>
+              <div class="field">
+                <label for="mission">Mission</label>
+                <select id="mission" name="mission" required>
+                  <option value="">Choisir</option>
+                  <option>Vitrine</option>
+                  <option>Application</option>
+                  <option>Automatisation</option>
+                  <option>Reprise d’un existant</option>
+                  <option>Autre</option>
+                </select>
+                <p class="err" id="err-mission"></p>
+              </div>
+              <div class="field">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" maxlength="2000" required></textarea>
+                <p class="err" id="err-message"></p>
+              </div>
+              <div class="hp">
+                <label for="societe">Société</label>
+                <input id="societe" name="societe" type="text" tabindex="-1" autocomplete="off" />
+              </div>
+              <button class="btn" type="submit">Transmettre le signal</button>
+            </form>
+            <div id="result" class="result" hidden>
+              <p class="kicker" id="result-status" tabindex="-1"></p>
+              <pre id="brief-out"></pre>
+              <button type="button" class="btn btn-ghost" id="reset-brief">Nouveau brief</button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="wrap footer-grid">
+          <div>
+            <p class="logo-foot">PowerTech</p>
+            <p>Thomas · ingénieur logiciel · Paris</p>
+          </div>
+          <p>Aucun cookie. Aucune mesure d’audience. Le brief ne quitte pas ta machine tant que tu ne l’envoies pas.</p>
+          <p><a href="https://github.com/thomasbuot940-alt">GitHub</a></p>
+        </div>
+      </footer>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

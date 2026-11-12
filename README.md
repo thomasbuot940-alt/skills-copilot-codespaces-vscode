@@ -1,11 +1,36 @@
-> Développeur web junior — jeux vidéo, sites web, interfaces soignées.  
-> Ouvert aux opportunités en PME et startup.
+> Développeur web — sites, outils, interfaces qui tiennent la charge.  
+> Missions freelance, PME et startups.
 
 # Thomas — Portfolio développeur
 
-Ingénieur logiciel. Je conçois des interfaces soignées, des apps web modernes, et des expériences qui se remarquent — pour les PME et startups (dont le Japon).
+Ingénieur logiciel. Je conçois des interfaces soignées, des apps web modernes, et des expériences qui se remarquent — pour les PME et startups.
 
-## Projet phare : Puissance Game
+## Projet phare : PowerTech
+
+Vitrine freelance **cyberpunk**. La page est le banc d’essai : pluie de 1 et de 0, grille en perspective, noyau, surcharge. La fluidité monte avec le défilement.
+
+**Code :** [`powertech/`](powertech/)
+
+| Accueil | Chambre de charge |
+| --- | --- |
+| ![Accueil PowerTech](screenshots/powertech/01-accueil.png) | ![Chambre de charge](screenshots/powertech/02-chambre.png) |
+
+| Mobile |
+| --- |
+| ![PowerTech sur mobile](screenshots/powertech/03-mobile.png) |
+
+### Lancer en local
+
+```bash
+cd powertech
+python3 -m http.server 8765
+```
+
+Puis ouvrir `http://127.0.0.1:8765`.
+
+Le brief reste sur la machine du visiteur (copie dans le presse-papiers). Pour ouvrir aussi la messagerie, remplacer `CONTACT_EMAIL` au début de `powertech/main.js`.
+
+## Projet précédent : Puissance Game
 
 Magasin de jeux vidéo **cyberpunk** multi-pages — vitrine technique et visuelle.
 
