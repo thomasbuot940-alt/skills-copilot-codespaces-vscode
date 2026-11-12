@@ -1,13 +1,12 @@
-> Développeur web — sites, outils, interfaces qui tiennent la charge.  
-> Missions freelance, PME et startups.
+> PowerTech crée des sites web par IA générative, en Python.
 
-# Thomas — Portfolio développeur
+# Thomas — PowerTech
 
-Ingénieur logiciel. Je conçois des interfaces soignées, des apps web modernes, et des expériences qui se remarquent — pour les PME et startups.
+Chez PowerTech, je crée des sites web par IA générative, sur le langage Python.
 
 ## Projet phare : PowerTech
 
-Vitrine freelance **cyberpunk**. La page est le banc d’essai : pluie de 1 et de 0, grille en perspective, noyau, surcharge. La fluidité monte avec le défilement.
+Vitrine de l’entreprise. Le texte vend le métier. La page monte en régime : pluie de 1 et de 0, grille, noyau, surcharge.
 
 **Code :** [`powertech/`](powertech/)
 

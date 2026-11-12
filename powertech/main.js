@@ -31,7 +31,7 @@ const canal = document.getElementById("canal");
 const GLYPH = ["0", "1"];
 const FONT = "500 13px 'IBM Plex Mono', ui-monospace, monospace";
 const PHRASE =
-  "01010000 01001111 01010111 01000101 01010010    ·    VITRINE    ·    01010100 01000101 01000011 01001000    ·    APPLICATION    ·    FLUIDITÉ    ·    AUTOMATISATION    ·    REPRISE    ·    ";
+  "01010000 01011001 01010100 01001000 01001111 01001110    ·    IA GÉNÉRATIVE    ·    PYTHON    ·    SITES WEB    ·    POWERTECH    ·    ";
 
 let columns = [];
 let particles = [];
@@ -620,7 +620,7 @@ function bindForm() {
     const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email);
     setFieldError("nom", "err-nom", data.name.length < 2 ? "Indique au moins deux caractères." : "");
     setFieldError("email", "err-email", emailOk ? "" : "Indique un email valide.");
-    setFieldError("mission", "err-mission", data.mission ? "" : "Choisis un type de mission.");
+    setFieldError("mission", "err-mission", data.mission ? "" : "Choisis le site que tu veux.");
     setFieldError(
       "message",
       "err-message",
