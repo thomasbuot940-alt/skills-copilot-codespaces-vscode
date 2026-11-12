@@ -258,6 +258,7 @@ function setupLead() {
     const body = brief();
     preview.hidden = false;
     preview.textContent = body;
+    note.textContent = "Brief prêt.";
     copyText(body, note);
   });
 }
