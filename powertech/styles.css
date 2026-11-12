@@ -32,7 +32,7 @@ body {
   font-family: var(--sans);
   font-size: 1.05rem;
   line-height: 1.6;
-  overflow-x: clip;
+  overflow-x: hidden;
 }
 
 #binaire {
@@ -340,7 +340,9 @@ textarea[aria-invalid="true"] {
 .choice input {
   width: 1.1rem;
   height: 1.1rem;
-  accent-color: var(--phosphor);
+  margin: 0;
+  padding: 0;
+  flex: 0 0 1.1rem;
 }
 
 .field-error {

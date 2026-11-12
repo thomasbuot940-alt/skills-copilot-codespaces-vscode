@@ -1,0 +1,19 @@
+name: Check PowerTech
+
+on:
+  push:
+    branches: [main, cursor/powertech-cyberpunk-1567]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check JavaScript
+        run: node --check powertech/main.js
+      - name: Check HTML
+        run: npx --yes html-validate@9.7.1 powertech/index.html
