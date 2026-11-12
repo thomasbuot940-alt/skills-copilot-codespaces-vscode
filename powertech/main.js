@@ -2,15 +2,37 @@
 
 const CONTACT_EMAIL = "thomasbuot940@gmail.com";
 
+/**
+ * @param {string} id
+ * @returns {HTMLElement | null}
+ */
+function element(id) {
+  const node = document.getElementById(id);
+  return node instanceof HTMLElement ? node : null;
+}
+
+/**
+ * @param {string} id
+ * @returns {HTMLInputElement | HTMLTextAreaElement | null}
+ */
+function textControl(id) {
+  const node = document.getElementById(id);
+  if (node instanceof HTMLInputElement || node instanceof HTMLTextAreaElement) return node;
+  return null;
+}
+
 function setupRain() {
-  const canvas = document.getElementById("binaire");
-  if (!canvas) return;
-  const ctx = canvas.getContext("2d");
-  if (!ctx) return;
+  const found = document.getElementById("binaire");
+  if (!(found instanceof HTMLCanvasElement)) return;
+  const canvas = found;
+  const context = canvas.getContext("2d");
+  if (!context) return;
+  const ctx = context;
 
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
   const font = "500 14px 'IBM Plex Mono', ui-monospace, monospace";
   const size = 16;
+  /** @type {{ x: number, y: number, speed: number, head: string }[]} */
   let columns = [];
   let width = 0;
   let height = 0;
@@ -51,6 +73,9 @@ function setupRain() {
     }
   }
 
+  /**
+   * @param {number} now
+   */
   function frame(now) {
     const dt = Math.min(0.034, (now - last) / 1000 || 0.016);
     last = now;
@@ -100,18 +125,29 @@ function setupRain() {
     }
     start();
   });
-  reduce.addEventListener("change", start);
+  if (typeof reduce.addEventListener === "function") reduce.addEventListener("change", start);
 }
 
+/**
+ * @param {string} value
+ * @returns {number | null}
+ */
 function euros(value) {
   let clean = value.trim().replace(/\s/g, "");
-  if (clean.indexOf(",") !== -1) clean = clean.replace(/\./g, "").replace(",", ".");
+  if (clean.indexOf(",") !== -1) {
+    clean = clean.replace(/\./g, "").replace(",", ".");
+  } else if (/^\d{1,3}(\.\d{3})+$/.test(clean)) {
+    clean = clean.replace(/\./g, "");
+  }
   if (!/^\d+(\.\d{1,2})?$/.test(clean)) return null;
   const amount = Number(clean);
   if (!Number.isFinite(amount) || amount <= 0 || amount > 1000000) return null;
   return amount;
 }
 
+/**
+ * @param {number} amount
+ */
 function formatEuros(amount) {
   return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(amount);
 }
@@ -123,6 +159,9 @@ function dayStamp() {
   return String(now.getFullYear()) + month + day;
 }
 
+/**
+ * @param {string} project
+ */
 function referenceFor(project) {
   const slug = project
     .normalize("NFD")
@@ -134,9 +173,13 @@ function referenceFor(project) {
   return "PT-" + dayStamp() + "-" + slug + "-" + salt;
 }
 
+/**
+ * @param {HTMLInputElement | HTMLTextAreaElement} input
+ * @param {string} message
+ */
 function bindField(input, message) {
   const slot = document.getElementById(input.id + "-error");
-  if (!slot) return;
+  if (!(slot instanceof HTMLElement)) return;
   if (message) {
     input.setAttribute("aria-invalid", "true");
     input.setAttribute("aria-describedby", slot.id);
@@ -148,6 +191,10 @@ function bindField(input, message) {
   slot.textContent = "";
 }
 
+/**
+ * @param {string} text
+ * @param {HTMLElement} note
+ */
 function copyText(text, note) {
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(function () {
@@ -161,16 +208,20 @@ function copyText(text, note) {
 }
 
 function setupLead() {
-  const form = document.getElementById("lead-form");
-  const note = document.getElementById("lead-note");
+  const foundForm = document.getElementById("lead-form");
+  const noteNode = element("lead-note");
   const copy = document.getElementById("lead-copy");
-  const preview = document.getElementById("lead-preview");
-  if (!form || !note || !copy || !preview) return;
+  const previewNode = element("lead-preview");
+  if (!(foundForm instanceof HTMLFormElement) || !noteNode || !(copy instanceof HTMLButtonElement) || !previewNode) return;
+  const form = foundForm;
+  const note = noteNode;
+  const preview = previewNode;
 
   function brief() {
-    const nom = document.getElementById("nom");
-    const email = document.getElementById("email");
-    const projet = document.getElementById("projet");
+    const nom = textControl("nom");
+    const email = textControl("email");
+    const projet = textControl("projet");
+    if (!nom || !email || !projet) return "";
     return [
       "Demande PowerTech",
       "Nom : " + nom.value.trim(),
@@ -180,9 +231,11 @@ function setupLead() {
   }
 
   function validate() {
-    const nom = document.getElementById("nom");
-    const email = document.getElementById("email");
-    const projet = document.getElementById("projet");
+    const nom = textControl("nom");
+    const email = textControl("email");
+    const projet = textControl("projet");
+    if (!nom || !email || !projet) return null;
+    /** @type {HTMLInputElement | HTMLTextAreaElement | null} */
     let first = null;
     const nomOk = nom.value.trim().length >= 2;
     bindField(nom, nomOk ? "" : "Indique un nom.");
@@ -228,34 +281,37 @@ function setupLead() {
 }
 
 function setupPayment() {
-  const form = document.getElementById("pay-form");
-  const note = document.getElementById("pay-note");
-  const slip = document.getElementById("pay-slip");
+  const foundForm = document.getElementById("pay-form");
+  const noteNode = element("pay-note");
+  const slipNode = element("pay-slip");
   const copy = document.getElementById("pay-copy");
   const send = document.getElementById("pay-send");
-  if (!form || !note || !slip || !copy || !send) return;
+  if (!(foundForm instanceof HTMLFormElement) || !noteNode || !slipNode || !(copy instanceof HTMLButtonElement) || !(send instanceof HTMLButtonElement)) return;
+  const form = foundForm;
+  const note = noteNode;
+  const slip = slipNode;
   let order = "";
   let signature = "";
 
   function read() {
-    const projet = document.getElementById("pay-projet");
-    const montant = document.getElementById("pay-montant");
-    const moyen = form.querySelector('input[name="moyen"]:checked');
-    const moyenError = document.getElementById("moyen-error");
+    const projet = textControl("pay-projet");
+    const montant = textControl("pay-montant");
+    const checked = form.querySelector('input[name="moyen"]:checked');
+    const moyen = checked instanceof HTMLInputElement ? checked : null;
+    const moyenError = element("moyen-error");
+    if (!projet || !montant) return null;
+    /** @type {HTMLInputElement | HTMLTextAreaElement | null} */
     let first = null;
     const projetOk = projet.value.trim().length >= 2;
     bindField(projet, projetOk ? "" : "Indique le nom du site livré.");
     if (!projetOk) first = first || projet;
     const amount = euros(montant.value);
-    bindField(montant, amount ? "" : "Indique un montant en euros, par exemple 1500 ou 1500,50.");
+    bindField(montant, amount ? "" : "Indique un montant en euros, par exemple 1500, 1.500 ou 1500,50.");
     if (!amount) first = first || montant;
-    if (moyenError) {
-      if (moyen) {
-        moyenError.textContent = "";
-      } else {
-        moyenError.textContent = "Choisis un moyen de paiement.";
-        first = first || form.querySelector('input[name="moyen"]');
-      }
+    if (moyenError) moyenError.textContent = moyen ? "" : "Choisis un moyen de paiement.";
+    if (!moyen && !first) {
+      const radio = form.querySelector('input[name="moyen"]');
+      if (radio instanceof HTMLInputElement) first = radio;
     }
     if (first || !amount || !moyen) return null;
     return {
@@ -271,8 +327,16 @@ function setupPayment() {
     slip.hidden = true;
   }
 
+  /**
+   * @param {{ projet: string, amount: number, moyen: string }} data
+   */
   function publish(data) {
     const next = data.projet + "|" + data.amount + "|" + data.moyen;
+    const refNode = element("pay-ref");
+    const amountNode = element("pay-amount");
+    const siteNode = element("pay-site");
+    const methodNode = element("pay-method");
+    if (!refNode || !amountNode || !siteNode || !methodNode) return;
     if (next !== signature) {
       signature = next;
       const ref = referenceFor(data.projet);
@@ -285,11 +349,11 @@ function setupPayment() {
         "Destinataire : " + CONTACT_EMAIL,
         "Statut : à régler, site livré."
       ].join("\n");
-      document.getElementById("pay-ref").textContent = ref;
+      refNode.textContent = ref;
     }
-    document.getElementById("pay-amount").textContent = formatEuros(data.amount);
-    document.getElementById("pay-site").textContent = data.projet;
-    document.getElementById("pay-method").textContent = data.moyen;
+    amountNode.textContent = formatEuros(data.amount);
+    siteNode.textContent = data.projet;
+    methodNode.textContent = data.moyen;
     slip.hidden = false;
     note.textContent = "Ordre prêt. Envoie-le pour lancer le règlement.";
   }
@@ -301,8 +365,11 @@ function setupPayment() {
       clearOrder();
       note.textContent = "La case de paiement est incomplète.";
       const invalid = form.querySelector("[aria-invalid='true']");
-      if (invalid) invalid.focus();
-      else form.querySelector('input[name="moyen"]').focus();
+      if (invalid instanceof HTMLElement) invalid.focus();
+      else {
+        const radio = form.querySelector('input[name="moyen"]');
+        if (radio instanceof HTMLElement) radio.focus();
+      }
       return;
     }
     publish(data);
@@ -327,11 +394,12 @@ function setupPayment() {
       return;
     }
     publish(data);
-    const subject = "Règlement PowerTech " + document.getElementById("pay-ref").textContent;
+    const refNode = element("pay-ref");
+    const subject = "Règlement PowerTech " + (refNode ? refNode.textContent : "");
     window.location.href = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(order);
   });
 }
 
-setupRain();
 setupLead();
 setupPayment();
+setupRain();
