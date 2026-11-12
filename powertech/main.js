@@ -128,30 +128,6 @@ function setupRain() {
   if (typeof reduce.addEventListener === "function") reduce.addEventListener("change", start);
 }
 
-/**
- * @param {string} value
- * @returns {number | null}
- */
-function euros(value) {
-  let clean = value.trim().replace(/\s/g, "");
-  if (clean.indexOf(",") !== -1) {
-    clean = clean.replace(/\./g, "").replace(",", ".");
-  } else if (/^\d{1,3}(\.\d{3})+$/.test(clean)) {
-    clean = clean.replace(/\./g, "");
-  }
-  if (!/^\d+(\.\d{1,2})?$/.test(clean)) return null;
-  const amount = Number(clean);
-  if (!Number.isFinite(amount) || amount <= 0 || amount > 1000000) return null;
-  return amount;
-}
-
-/**
- * @param {number} amount
- */
-function formatEuros(amount) {
-  return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(amount);
-}
-
 function dayStamp() {
   const now = new Date();
   const month = String(now.getMonth() + 1).padStart(2, "0");
@@ -295,28 +271,23 @@ function setupPayment() {
 
   function read() {
     const projet = textControl("pay-projet");
-    const montant = textControl("pay-montant");
     const checked = form.querySelector('input[name="moyen"]:checked');
     const moyen = checked instanceof HTMLInputElement ? checked : null;
     const moyenError = element("moyen-error");
-    if (!projet || !montant) return null;
+    if (!projet) return null;
     /** @type {HTMLInputElement | HTMLTextAreaElement | null} */
     let first = null;
     const projetOk = projet.value.trim().length >= 2;
     bindField(projet, projetOk ? "" : "Indique le nom du site livré.");
     if (!projetOk) first = first || projet;
-    const amount = euros(montant.value);
-    bindField(montant, amount ? "" : "Indique un montant en euros, par exemple 1500, 1.500 ou 1500,50.");
-    if (!amount) first = first || montant;
     if (moyenError) moyenError.textContent = moyen ? "" : "Choisis un moyen de paiement.";
     if (!moyen && !first) {
       const radio = form.querySelector('input[name="moyen"]');
       if (radio instanceof HTMLInputElement) first = radio;
     }
-    if (first || !amount || !moyen) return null;
+    if (first || !moyen) return null;
     return {
       projet: projet.value.trim(),
-      amount: amount,
       moyen: moyen.value
     };
   }
@@ -328,22 +299,20 @@ function setupPayment() {
   }
 
   /**
-   * @param {{ projet: string, amount: number, moyen: string }} data
+   * @param {{ projet: string, moyen: string }} data
    */
   function publish(data) {
-    const next = data.projet + "|" + data.amount + "|" + data.moyen;
+    const next = data.projet + "|" + data.moyen;
     const refNode = element("pay-ref");
-    const amountNode = element("pay-amount");
     const siteNode = element("pay-site");
     const methodNode = element("pay-method");
-    if (!refNode || !amountNode || !siteNode || !methodNode) return;
+    if (!refNode || !siteNode || !methodNode) return;
     if (next !== signature) {
       signature = next;
       const ref = referenceFor(data.projet);
       order = [
         "PowerTech — ordre de paiement",
         "Site : " + data.projet,
-        "Montant : " + formatEuros(data.amount),
         "Moyen : " + data.moyen,
         "Référence : " + ref,
         "Destinataire : " + CONTACT_EMAIL,
@@ -351,7 +320,6 @@ function setupPayment() {
       ].join("\n");
       refNode.textContent = ref;
     }
-    amountNode.textContent = formatEuros(data.amount);
     siteNode.textContent = data.projet;
     methodNode.textContent = data.moyen;
     slip.hidden = false;

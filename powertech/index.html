@@ -186,10 +186,9 @@
           <h2 id="titre-paiement">Case de paiement</h2>
         </div>
         <p class="lead">
-          Quand le site est développé, le client paie ici. La case prépare le
-          montant, le moyen et une référence. Le règlement part vers PowerTech.
-          Le paiement par carte sera branché sur cette même case quand le compte
-          de la startup sera ouvert.
+          Quand le site est développé, le client paie ici. La case propose le
+          moyen de règlement, sans tarif. Le paiement par carte sera branché
+          sur cette même case quand le compte de la startup sera ouvert.
         </p>
         <form id="pay-form" class="panel pay-case" method="post" action="#paiement" novalidate>
           <p class="pay-flag">Payable une fois le site livré</p>
@@ -197,11 +196,6 @@
             <label for="pay-projet">Site livré</label>
             <input id="pay-projet" name="pay-projet" type="text" maxlength="80" required>
             <p class="field-error" id="pay-projet-error"></p>
-          </div>
-          <div class="field">
-            <label for="pay-montant">Montant convenu, en euros</label>
-            <input id="pay-montant" name="pay-montant" type="text" inputmode="decimal" autocomplete="off" placeholder="1500" required>
-            <p class="field-error" id="pay-montant-error"></p>
           </div>
           <fieldset class="field">
             <legend>Moyen de paiement</legend>
@@ -225,7 +219,6 @@
             <button type="button" class="btn" id="pay-send">Envoyer l’ordre</button>
           </div>
           <div id="pay-slip" class="slip" hidden>
-            <p class="slip-amount" id="pay-amount"></p>
             <dl>
               <div>
                 <dt>Référence</dt>
