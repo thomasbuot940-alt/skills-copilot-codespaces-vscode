@@ -1,53 +1,42 @@
-> Développeur web junior — jeux vidéo, sites web, interfaces soignées.  
-> Ouvert aux opportunités en PME et startup.
+# POWERTECH THE FUTURE
 
-# Thomas — Portfolio développeur
+Site officiel du studio de Thomas : vitrine freelance, lab recruteurs, checkout carte et Angel, l'assistante IA.
 
-Ingénieur logiciel. Je conçois des interfaces soignées, des apps web modernes, et des expériences qui se remarquent — pour les PME et startups (dont le Japon).
+Sous-titre : `PYTHON ENGINEERING // AI, 3D & WEB SYSTEMS`.
 
-## Projet phare : Puissance Game
+## Lancer
 
-Magasin de jeux vidéo **cyberpunk** multi-pages — vitrine technique et visuelle.
-
-**Démo live (bêta) :** [https://rainbow-flare-e78asgg.shipstatic.com](https://rainbow-flare-e78asgg.shipstatic.com)
-
-**Portfolio + captures (GitHub Pages) :** [https://thomasbuot940-alt.github.io/skills-copilot-codespaces-vscode/](https://thomasbuot940-alt.github.io/skills-copilot-codespaces-vscode/)
-
-| Accueil | Catalogue |
-| --- | --- |
-| ![Accueil Puissance Game](screenshots/puissance-game/01-accueil.png) | ![Catalogue](screenshots/puissance-game/02-catalogue.png) |
-
-| Fiche produit | Panier |
-| --- | --- |
-| ![Produit Neon Protocol](screenshots/puissance-game/03-produit-neon-protocol.png) | ![Panier](screenshots/puissance-game/04-panier.png) |
-
-| À propos | Chatbot PULSE |
-| --- | --- |
-| ![À propos](screenshots/puissance-game/05-a-propos.png) | ![Chatbot PULSE](screenshots/puissance-game/06-chatbot-pulse.png) |
-
-### Ce que montre ce projet
-- Multi-pages React (catalogue, fiche, panier, contact)
-- Transitions « pluie binaire » 0/1
-- Ambiance sonore **générative** (Web Audio, libre de droits)
-- Conseiller produit (chatbot PULSE)
-- UI responsive, direction visuelle assumée
-
-### Lancer en local
 ```bash
-cd puissance-game
 npm install
 npm run dev
 ```
 
-Code source : [`puissance-game/`](puissance-game/) · PR : [#1](https://github.com/thomasbuot940-alt/skills-copilot-codespaces-vscode/pull/1)
+Puis ouvrir `http://localhost:3000`.
 
-## Compétences
-- **Front-end :** React, TypeScript, Vite, CSS moderne, animations, UX
-- **Produit :** sites vitrine, e‑commerce démo, storytelling de marque
-- **Qualité :** responsive, accessibilité de base, déploiements statiques
-- **Audio / interaction :** Web Audio, widgets conversationnels
+```bash
+npm run check
+npm run build
+```
 
-## Contact
-Ouvert aux missions et CDI avec des PME / startups qui veulent du craft, pas seulement des maquettes.
+## Parcours
 
-→ Voir aussi la page [À propos](https://rainbow-flare-e78asgg.shipstatic.com/a-propos) sur la démo live.
+- **Terminal** — présentation et interpréteur Python sûr (expressions, variables, `print`).
+- **Méthode** — texte clair sur le pilotage de l'IA générative et le contrôle humain.
+- **Lab** — activité illustrative, filtres, live preview, extrait de code. Ajoutez une création dans `data/projects.ts`.
+- **Offres** — Starter 149 €, Pro 397 € (ou 2x 209 €), Enterprise 797 €, maintenance 49 €/mois, TJM 350 €/jour.
+- **Paiement** — carte holographique. Le numéro reste dans le navigateur. `/api/checkout` recalcule le total et, si `STRIPE_SECRET_KEY` est posée, crée un PaymentIntent. Aucune donnée de carte n'est acceptée par le serveur.
+- **Angel** — s'ouvre une seconde après l'arrivée. Voix navigateur par défaut. Clés optionnelles dans `.env.example` : `GEMINI_API_KEY` (`gemini-2.5-pro`) ou `OPENAI_API_KEY` (`gpt-4o`). Sans clé, le cerveau local répond. Le mode Studio rédige un prompt Cursor copiable.
+
+## Audio
+
+`AudioEngine` synthétise une nappe dark-synth dans le navigateur et baisse le volume quand Angel parle ou quand le micro est ouvert. Si le contexte audio échoue, lecture de `public/cyberpunk-theme.mp3`.
+
+```bash
+npm run theme
+```
+
+régénère ce fichier.
+
+## Angel, le portrait
+
+`public/angel-avatar.png` est le portrait d'Angel, personnage original du studio (cheveux bleu glace, tenue sombre, halo cyan). Si le fichier manque, l'interface bascule sur un glyphe holographique.
