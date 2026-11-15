@@ -16,7 +16,7 @@ export function ProjectModal({ project, onClose }: { project: Project; onClose: 
   }, [onClose]);
 
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-black/70 p-4" role="presentation" onClick={onClose}>
+    <div className="fixed inset-0 z-[70] grid place-items-center bg-black/70 p-4" role="presentation" onClick={onClose}>
       <div
         role="dialog"
         aria-modal="true"

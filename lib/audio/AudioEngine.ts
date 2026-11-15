@@ -24,7 +24,6 @@ export class AudioEngine {
   private ducks = 0;
   private lastHover = 0;
   private listeners = new Set<Listener>();
-  private starting: Promise<void> | null = null;
 
   static get(): AudioEngine {
     if (!AudioEngine.instance) AudioEngine.instance = new AudioEngine();
@@ -103,15 +102,12 @@ export class AudioEngine {
   }
 
   private async start(): Promise<void> {
-    if (this.running) return;
-    if (this.starting) return this.starting;
-    this.starting = this.startInner().finally(() => {
-      this.starting = null;
-    });
-    return this.starting;
+    if (this.running && this.mode === "synth" && this.source) return;
+    const boot = ++this.bootId;
+    await this.startInner(boot);
   }
 
-  private async startInner(): Promise<void> {
+  private async startInner(boot: number): Promise<void> {
     const Ctx = window.AudioContext || (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
     if (!Ctx) {
       await this.startFile();
@@ -120,9 +116,19 @@ export class AudioEngine {
     try {
       if (!this.ctx) this.ctx = new Ctx();
       if (this.ctx.state === "suspended") await this.ctx.resume();
+      if (boot !== this.bootId || !this.desired) return;
       this.ensureGraph();
-      const rendered = cachedTheme(this.ctx.sampleRate);
-      const buffer = this.ctx.createBuffer(2, rendered.left.length, this.ctx.sampleRate);
+      this.bindVisibility();
+      if (!this.fallback || this.fallback.paused) await this.startFile();
+      this.running = true;
+      this.mode = "file";
+      this.emit();
+      await new Promise((resolve) => window.setTimeout(resolve, 40));
+      if (boot !== this.bootId || !this.desired) return;
+      const rendered = cachedTheme(22050);
+      if (boot !== this.bootId || !this.desired || !this.ctx) return;
+      if (this.ctx.state === "suspended") await this.ctx.resume();
+      const buffer = this.ctx.createBuffer(2, rendered.left.length, 22050);
       buffer.getChannelData(0).set(rendered.left);
       buffer.getChannelData(1).set(rendered.right);
       this.stopSource();
@@ -132,12 +138,12 @@ export class AudioEngine {
       source.connect(this.filter!);
       source.start();
       this.source = source;
+      this.fallback?.pause();
       this.mode = "synth";
       this.running = true;
-      this.bindVisibility();
       this.emit();
     } catch {
-      await this.startFile();
+      if (boot === this.bootId && this.desired) await this.startFile();
     }
   }
 
@@ -204,6 +210,7 @@ export class AudioEngine {
   }
 
   private stop(): void {
+    this.bootId += 1;
     this.stopSource();
     if (this.fallback) {
       this.fallback.pause();
@@ -285,6 +292,7 @@ export class AudioEngine {
   }
 
   private visibilityBound = false;
+  private bootId = 0;
 
   private emit(): void {
     this.listeners.forEach((listener) => listener());

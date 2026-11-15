@@ -33,7 +33,7 @@ function Wipe({ active }: { active: boolean }) {
 }
 
 function Stage() {
-  const { view, setView, setAngelOpen } = useSite();
+  const { view, setView, setAngelOpen, angelOpen } = useSite();
   const [wipe, setWipe] = useState(false);
   const seen = useRef(view);
 
@@ -70,13 +70,13 @@ function Stage() {
   }, [setAngelOpen, setView]);
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, ease: "easeOut" }} className="relative min-h-screen">
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, ease: "easeOut" }} className={`relative min-h-screen ${angelOpen ? "xl:pr-[440px]" : ""}`}>
       <BinaryField />
       <div className="scanlines" />
       <CyberCursor />
       <HudBar />
       <Wipe active={wipe} />
-      <main className="relative z-10 mx-auto w-full max-w-6xl px-5 pb-28 pt-48 sm:px-10 md:pt-36">
+      <main className="relative z-10 mx-auto w-full max-w-6xl px-5 pb-28 pt-[calc(var(--hud-h,11rem)+1.25rem)] sm:px-8">
         <AnimatePresence mode="wait">
           <motion.div
             key={view}

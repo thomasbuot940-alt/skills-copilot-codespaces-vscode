@@ -18,6 +18,22 @@ export function HudBar() {
   const [clock, setClock] = useState("");
 
   useEffect(() => {
+    const header = document.querySelector("header.hud-glass");
+    if (!header) return;
+    const apply = () => {
+      document.documentElement.style.setProperty("--hud-h", `${Math.ceil(header.getBoundingClientRect().height)}px`);
+    };
+    apply();
+    const observer = new ResizeObserver(apply);
+    observer.observe(header);
+    window.addEventListener("resize", apply);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", apply);
+    };
+  }, []);
+
+  useEffect(() => {
     const format = () => new Intl.DateTimeFormat("fr-FR", {
       timeZone: "Europe/Paris",
       hour: "2-digit",
@@ -65,7 +81,7 @@ export function HudBar() {
         <button
           type="button"
           onClick={() => setView("offers")}
-          className="inline-flex max-w-full items-center gap-2 border border-matrix/50 bg-matrix/5 px-3 py-1 text-left font-mono text-[10px] tracking-[0.08em] text-matrix sm:text-[11px]"
+          className="inline-flex max-w-full items-center gap-2 border border-matrix/50 bg-matrix/5 px-3 py-1 text-left font-mono text-[10px] leading-snug tracking-[0.08em] text-matrix sm:text-[11px]"
         >
           <span className="status-dot shrink-0" aria-hidden />
           STATUT : DISPONIBLE POUR MISSIONS & RECRUTEMENT TECH (TJM 350 €/j)

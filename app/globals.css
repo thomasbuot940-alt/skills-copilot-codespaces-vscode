@@ -52,6 +52,9 @@ body {
 .binary-edge { top: 0; bottom: 0; width: 42px; z-index: 1; }
 .binary-edge.left { left: 0; }
 .binary-edge.right { right: 0; }
+@media (max-width: 767px) {
+  .binary-edge { display: none; }
+}
 
 .scanlines {
   position: fixed;
